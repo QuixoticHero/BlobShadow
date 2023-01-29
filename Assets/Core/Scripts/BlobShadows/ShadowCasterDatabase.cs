@@ -16,17 +16,18 @@ public class ShadowCasterDatabase : ScriptableObject
             if (_instance != null) return _instance;
 
             // Should be removed from Property
-            CreateShadowCasterSystem();
+            if(casterSystem == null) CreateShadowCasterSystem();
 
             _instance = Resources.Load("ShadowCasterDatabase") as ShadowCasterDatabase;
             return _instance;
         }
     }
 
+    private static ShadowCasterSystem casterSystem;
     private static void CreateShadowCasterSystem()
     {
         GameObject shadowCasterSystem = new GameObject();
-        shadowCasterSystem.AddComponent<ShadowCasterSystem>();
+        casterSystem = shadowCasterSystem.AddComponent<ShadowCasterSystem>();
         shadowCasterSystem.name = "ShadowCasterSystem";
 
         DontDestroyOnLoad(shadowCasterSystem);
@@ -46,19 +47,37 @@ public class ShadowCasterDatabase : ScriptableObject
 
     public void Remove(IShadowCaster caster)
     {
-        ResetGlobalValue();
+        //ResetGlobalValue();
 
         shadowCasters.Remove(caster);
     }
 
     public void ResetGlobalValue()
     {
-        ShadowCasterSystemSettings settings = ShadowCasterSystemSettings.Instance;
+        //ShadowCasterSystemSettings settings = ShadowCasterSystemSettings.Instance;
 
-        int count = shadowCasters.Count - 1;
-        string name = settings.GetCasterName + ((count < 10) ? "0" : "") + count;
+        //IShadowCaster[] shadowCasters = GetArray();
+        //Vector4[] castersData = new Vector4[settings.GetMaxCasters];
 
-        Shader.SetGlobalVector(name, settings.GetResetValue);
+        //Shader.SetGlobalInteger("_GCasterSize", shadowCasters.Length);
+
+        //for (int i = 0; i < shadowCasters.Length; i++)
+        //{
+        //    castersData[i] = shadowCasters[i].CenterSize;
+        //}
+
+        //for (int i = shadowCasters.Length - 1; i < settings.GetMaxCasters; i++)
+        //{
+        //    castersData[i] = settings.GetResetValue;
+        //}
+
+        //Shader.SetGlobalVectorArray("_GShadowCasters", castersData);
+
+
+        //int count = shadowCasters.Count - 1;
+        //string name = settings.GetCasterName + ((count < 10) ? "0" : "") + count;
+
+        //Shader.SetGlobalVector(name, settings.GetResetValue);
     }
 
 }

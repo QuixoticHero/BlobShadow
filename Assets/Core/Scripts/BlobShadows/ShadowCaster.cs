@@ -10,6 +10,8 @@ public class ShadowCaster : MonoBehaviour, IShadowCaster
 
     public float Size => size;
 
+    public Vector4 CenterSize 
+        => new Vector4(transform.position.x, transform.position.y, transform.position.z, size);
 
     private void OnEnable()
     {

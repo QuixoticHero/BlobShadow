@@ -19,10 +19,12 @@ public class ShadowCasterSystemSettings : ScriptableObject
         }
     }
 
+    [SerializeField] private int maxCaster = 16;
     [SerializeField] private string casterName = "_Caster";
     [SerializeField] private float fps = 0.04167f;
     [SerializeField] private Vector4 resetValue = new Vector4(-1000, -1000, -1000, 0);
     
+    public int GetMaxCasters { get { return maxCaster; } }
     public string GetCasterName { get => casterName; }
     public float GetFps { get => fps;}
     public Vector4 GetResetValue { get => resetValue; }
